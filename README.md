@@ -86,13 +86,14 @@ Ho ho ho! This repository contains my solutions for the Advent of Code 2025 chal
 ## ❄️ Solutions Overview
 
 ### 🎁 Day 1: Cracking the Safe
-*"Santa's locked his gift list in a safe! Help crack the combination!"*
+*"Santa's locked the password behinf a ... password?!"*
 
 The elves need help opening Santa's combination safe. Using a series of left and right rotations, we simulate the knob movements and track how many times we pass through or land on specific values.
 
 **Features:**
 - 🔐 Safe simulation with customizable parameters
-- 🎯 Tracks landing positions and pass-throughs
+- 🎯 **Part 1**: Tracks landing on a given position 
+- 🎯 **Part 2**: Tracks the amount of pass-throughs on a given position
 - 🔄 Handles wraparound rotations like a real safe
 
 ### 🎁 Day 2: Gift Shop Pattern Detective
