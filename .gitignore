@@ -1,4 +1,6 @@
-
-*/input.txt
 node_modules/
-dist/
+ dist/
+ .env
+
+
+input.txt
