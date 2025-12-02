@@ -117,7 +117,7 @@ A mischievous young elf has been adding invalid product IDs with repeating digit
 
 ```bash
 # Clone the North Pole repository
-git clone [https://github.com/sanderslagman/adventofcode2025.git](https://github.com/sanderslagman/adventofcode2025.git)
+git clone https://github.com/sanderslagman/adventofcode2025.git
 cd adventofcode2025
 
 # Install the magic dependencies
