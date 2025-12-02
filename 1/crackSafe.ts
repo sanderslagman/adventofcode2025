@@ -11,6 +11,10 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
+/**
+ * Safe class that simulates a combination lock with a rotating knob
+ * Tracks how many times the knob lands on or passes through a specific value
+ */
 class Safe {
   private nums: number;
   private start: number;
@@ -18,12 +22,23 @@ class Safe {
   private landedCounter: number = 0;
   private passedCounter: number = 0;
 
+  /**
+   * Creates a new Safe instance
+   * @param nums - Total number of positions on the knob (default: 100)
+   * @param start - Starting position of the knob (default: 50)
+   * @param checkValue - The value to track when landed on or passed through (default: 0)
+   */
   constructor(nums: number = 100, start: number = 50, checkValue: number = 0) {
     this.nums = nums;
     this.start = start;
     this.checkValue = checkValue;
   }
 
+  /**
+   * Rotates the safe knob according to the given steps and tracks interactions with checkValue
+   * @param steps - Array of step strings in format "R10" (right 10) or "L5" (left 5)
+   * @returns String summary of how many times the knob landed on or passed through checkValue
+   */
   rotateKnob(steps: string[]): string {
     const numbers = this.extractNumbersfromSteps(steps);
     let currentPosition = this.start;
@@ -45,6 +60,13 @@ class Safe {
     return `Landed at check value (${this.checkValue}) ${this.landedCounter} times.\nPassed through check value ${this.passedCounter} times.`;
   }
 
+  /**
+   * Counts how many times the knob passes through the checkValue during a rotation
+   * Handles both clockwise and counterclockwise rotations, including wraparound
+   * @param from - Starting position of the rotation
+   * @param steps - Number of steps to rotate (positive for right, negative for left)
+   * @returns Number of times the checkValue was passed through during rotation
+   */
   countPassThroughs(from: number, steps: number): number {
     if (steps === 0) return 0;
     
@@ -88,6 +110,11 @@ class Safe {
     return count;
   }
 
+  /**
+   * Converts step strings into numeric values with direction
+   * @param steps - Array of step strings (e.g., ["R10", "L5", "R3"])
+   * @returns Array of numbers where positive = right/clockwise, negative = left/counterclockwise
+   */
   extractNumbersfromSteps(steps: string[]): number[] {
     return steps.map((step) => {
       const direction = step[0];
@@ -97,6 +124,11 @@ class Safe {
   }
 }
 
+/**
+ * Main function that runs the safe cracking simulation
+ * Reads combination steps from 'input.txt' and prompts user for safe parameters
+ * Then simulates the knob rotation and reports results
+ */
 async function run() {
   let numsOnKnob = 100;
   let startPosition = 50;
@@ -104,14 +136,14 @@ async function run() {
   let steps: string[] = [];
   
   try {
-    const fileContent = fs.readFileSync("combination.txt", "utf-8");
+    const fileContent = fs.readFileSync("input.txt", "utf-8");
     steps = fileContent
       .split("\n")
       .map((step: string) => step.trim())
       .filter((s: string) => s.length > 0);
     console.log(`Loaded ${steps.length} steps from file`);
   } catch (error) {
-    console.error("Error reading combination.txt:", error);
+    console.error("Error reading input.txt:", error);
     rl.close();
     return;
   }
