@@ -75,10 +75,13 @@ Ho ho ho! This repository contains my solutions for the Advent of Code 2025 chal
 🎄 adventofcode2025/
 ├── 🎁 1/                    # Day 1: Safe Cracking Adventure
 │   ├── 🔐 crackSafe.ts      # Combination lock simulation
-│   └── 📜 combination.txt   # Secret combination steps
+│   └── 📝 input.txt         # Secret combination steps
 ├── 🎁 2/                    # Day 2: Gift Shop Pattern Detective  
 │   ├── 🔍 patterns.ts       # Invalid product ID detection
 │   └── 📝 input.txt         # Product ID ranges to check
+├── 🎁 3/                    # Day 3: Battery Joltage Calculator
+│   ├── ⚡ joltage.ts        # Battery bank optimization
+│   └── 📝 input.txt         # Battery joltage ratings
 ├── 📦 package.json          # Dependencies & scripts
 └── 🎅 README.md             # You are here! Ho ho ho!
 ```
@@ -106,6 +109,17 @@ A mischievous young elf has been adding invalid product IDs with repeating digit
 - 🎯 **Part 2**: Detects patterns repeated at least twice (111, 12341234, 1212121212)
 - 📊 Processes large ranges efficiently
 - 🔍 Comprehensive pattern detection algorithms
+
+### 🎁 Day 3: Battery Joltage Calculator
+*"The escalator needs power, and we've got batteries to spare!"*
+
+The underground escalator is offline and needs joltage from battery banks. Each bank contains multiple batteries with joltage ratings from 1-9. We need to select the optimal batteries to produce maximum joltage.
+
+**Features:**
+- ⚡ **Part 1**: Selects 2 batteries per bank for maximum 2-digit joltage
+- ⚡ **Part 2**: Selects 12 batteries per bank for maximum 12-digit joltage
+- 🧮 Uses greedy algorithm for optimal battery selection
+
 
 ## 🚀 Getting Started
 
@@ -138,6 +152,13 @@ npx tsx crackSafe.ts
 cd 2/
 # Add your puzzle input to input.txt, then:
 npx tsx patterns.ts
+```
+
+**Day 3 - Battery Joltage:**
+```bash
+cd 3/
+# Add your puzzle input to input.txt, then:
+npx tsx joltage.ts
 ```
 
 ## 🎅 Technologies Used
