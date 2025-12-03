@@ -1,8 +1,4 @@
-node_modules/
- dist/
- .env
 
- */input.txt
- **/input.txt
- input.txt
- *.txt
+*/input.txt
+node_modules/
+dist/
