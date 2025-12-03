@@ -8,19 +8,28 @@ const fs = require("node:fs");
 /**
  * Find the maximum joltage that can be produced from a bank of batteries
  * by selecting exactly two batteries.
+ * Optimized: O(n) - single pass to find best pair maintaining order
  * @param bank - String of digits representing battery joltage ratings
  * @returns Maximum joltage possible from this bank
  */
 function findMaxJoltage(bank: string): number {
   let maxJoltage = 0;
 
-  // Try every combination of two batteries
+  // For maximum 2-digit number, we want the largest first digit
+  // followed by the largest available second digit after it
   for (let i = 0; i < bank.length - 1; i++) {
-    for (let j = i + 1; j < bank.length; j++) {
-      // Form a two-digit number from batteries at positions i and j
-      const joltage = parseInt(bank[i] + bank[j]);
-      maxJoltage = Math.max(maxJoltage, joltage);
+    const firstDigit = bank[i];
+    
+    // Find the largest digit after position i
+    let maxSecondDigit = bank[i + 1];
+    for (let j = i + 2; j < bank.length; j++) {
+      if (bank[j] > maxSecondDigit) {
+        maxSecondDigit = bank[j];
+      }
     }
+    
+    const joltage = parseInt(firstDigit + maxSecondDigit);
+    maxJoltage = Math.max(maxJoltage, joltage);
   }
 
   return maxJoltage;
@@ -75,9 +84,6 @@ function calculateTotalJoltage(banks: string[]): number {
 
   for (const bank of banks) {
     const maxJoltage = findMaxJoltage(bank);
-    console.log(
-      `Bank: ${bank.substring(0, 20)}... -> Max joltage: ${maxJoltage}`
-    );
     total += maxJoltage;
   }
 
@@ -94,9 +100,6 @@ function calculateTotalJoltage12(banks: string[]): bigint {
 
   for (const bank of banks) {
     const maxJoltage = findMaxJoltage12(bank);
-    console.log(
-      `Bank: ${bank.substring(0, 20)}... -> Max joltage: ${maxJoltage}`
-    );
     total += maxJoltage;
   }
 
@@ -104,6 +107,8 @@ function calculateTotalJoltage12(banks: string[]): bigint {
 }
 
 function run() {
+  const startTime = performance.now();
+  
   try {
     const input = fs.readFileSync("input.txt", "utf-8");
     const banks = input
@@ -114,12 +119,21 @@ function run() {
     console.log(`Loaded ${banks.length} battery banks\n`);
 
     console.log("=== PART 1 ===");
+    const part1Start = performance.now();
     const totalJoltage = calculateTotalJoltage(banks);
-    console.log(`\nTotal output joltage (Part 1): ${totalJoltage}\n`);
+    const part1Time = performance.now() - part1Start;
+    console.log(`\nTotal output joltage (Part 1): ${totalJoltage}`);
+    console.log(`⏱️  Part 1 execution time: ${part1Time.toFixed(3)}ms\n`);
 
     console.log("=== PART 2 ===");
+    const part2Start = performance.now();
     const totalJoltage12 = calculateTotalJoltage12(banks);
+    const part2Time = performance.now() - part2Start;
     console.log(`\nTotal output joltage (Part 2): ${totalJoltage12}`);
+    console.log(`⏱️  Part 2 execution time: ${part2Time.toFixed(3)}ms\n`);
+    
+    const totalTime = performance.now() - startTime;
+    console.log(`⏱️  Total execution time: ${totalTime.toFixed(3)}ms`);
   } catch (error) {
     console.error("Error reading input.txt:", error);
   }
