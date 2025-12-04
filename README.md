@@ -82,6 +82,9 @@ Ho ho ho! This repository contains my solutions for the Advent of Code 2025 chal
 ├── 🎁 3/                    # Day 3: Battery Joltage Calculator
 │   ├── ⚡ joltage.ts        # Battery bank optimization
 │   └── 📝 input.txt         # Battery joltage ratings
+├── 🎁 4/                    # Day 4: Forklift Paper Roll Optimization
+│   ├── 🚛 forklift.ts       # Paper roll accessibility analysis
+│   └── 📝 input.txt         # Paper roll grid layout
 ├── 📦 package.json          # Dependencies & scripts
 └── 🎅 README.md             # You are here! Ho ho ho!
 ```
@@ -119,6 +122,16 @@ The underground escalator is offline and needs joltage from battery banks. Each 
 - ⚡ **Part 1**: Selects 2 batteries per bank for maximum 2-digit joltage
 - ⚡ **Part 2**: Selects 12 batteries per bank for maximum 12-digit joltage
 - 🧮 Uses greedy algorithm for optimal battery selection
+
+### 🎁 Day 4: Forklift Paper Roll Optimization
+*"Help the printing department optimize their forklift operations!"*
+
+The printing department has paper rolls scattered across a grid, and forklifts need to access them efficiently. A paper roll can only be accessed if it has fewer than 4 adjacent paper rolls. Help optimize the workflow so forklifts can break through to the cafeteria!
+
+**Features:**
+- 🚛 **Part 1**: Identifies initially accessible paper rolls
+- 🚛 **Part 2**: Recursively removes all possible paper rolls until none remain accessible
+- 📍 Grid-based neighbor counting in 8 directions
 
 
 ## 🚀 Getting Started
@@ -159,6 +172,13 @@ npx tsx patterns.ts
 cd 3/
 # Add your puzzle input to input.txt, then:
 npx tsx joltage.ts
+```
+
+**Day 4 - Forklift Optimization:**
+```bash
+cd 4/
+# Add your puzzle input to input.txt, then:
+npx tsx forklift.ts
 ```
 
 ## 🎅 Technologies Used
